@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+transformers
+torch
+numpy
+python-dotenv
+huggingface_hub
+accelerate
+sentencepiece

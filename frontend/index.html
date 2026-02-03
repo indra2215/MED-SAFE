@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedSafe - Medication Interaction Checker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-pills"></i>
+                MedSafe
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <!-- REMOVED SIGN UP BUTTON -->
+                <a href="login.html" class="btn btn-primary">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Safe Medication Management Made Simple</h1>
+                <p>Many patients take multiple medicines prescribed by different doctors without understanding potential drug interactions. Our AI system helps you identify risks in simple, easy-to-understand language.</p>
+                <div class="hero-actions">
+                    <!-- NOW DIRECTLY GOES TO LOGIN PAGE -->
+                    <a href="login.html" class="btn btn-primary btn-lg pulse">
+                        <i class="fas fa-rocket"></i> Get Started
+                    </a>
+                    <a href="#video" class="btn btn-outline btn-lg">
+                        <i class="fas fa-play-circle"></i> Watch Demo
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="floating-card">
+                    <div class="card-header">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Medication Safety Check</h3>
+                    </div>
+                    <div class="medication-list">
+                        <div class="med-item">
+                            <span class="med-name">Lisinopril</span>
+                            <span class="med-status status-safe">Safe</span>
+                        </div>
+                        <div class="med-item">
+                            <span class="med-name">Metformin</span>
+                            <span class="med-status status-safe">Safe</span>
+                        </div>
+                        <div class="med-item">
+                            <span class="med-name">Atorvastatin</span>
+                            <span class="med-status status-warning">Check Needed</span>
+                        </div>
+                        <div class="med-item">
+                            <span class="med-name">Warfarin</span>
+                            <span class="med-status status-danger">Interaction</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <!-- THIS BUTTON NOW GOES TO LOGIN -->
+                        <a href="login.html" class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-search"></i> Check Interactions
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>How MedSafe Works</h2>
+                <p>Our simple 3-step process helps you identify potential medication interactions quickly and easily.</p>
+            </div>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Enter Your Medications</h3>
+                    <p>Add your prescription drugs and supplements to your personal medication list.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>AI-Powered Analysis</h3>
+                    <p>Our advanced AI system checks for potential interactions using medical models.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Get Clear Results</h3>
+                    <p>Receive simple explanations of any risks and recommendations to discuss with your doctor.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About MedSafe</h2>
+                    <p>MedSafe was created to solve the problem of difficult-to-understand medical data. Many patients struggle to interpret prescription information.</p>
+                    <p>Our mission is to translate medical complexity into simple, everyday language.</p>
+                    <!-- BUTTON LINK FIXED TO LOGIN -->
+                    <a href="login.html" class="btn btn-secondary">
+                        <i class="fas fa-book-medical"></i> Learn More
+                    </a>
+                </div>
+                
+                <div class="about-image">
+                    <div class="about-img-placeholder">
+                        <i class="fas fa-stethoscope"></i>
+                        <h3>Healthcare Innovation</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose MedSafe?</h2>
+                <p>Our AI-powered platform makes medication safety accessible to everyone.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon icon-1">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI-Powered Analysis</h3>
+                    <p>Advanced AI models analyze drug combinations with medical accuracy.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon icon-2">
+                        <i class="fas fa-comment-medical"></i>
+                    </div>
+                    <h3>Easy to Understand</h3>
+                    <p>We explain interactions in simple language with suggested alternatives.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon icon-3">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Safety First</h3>
+                    <p>Identify dangerous drug interactions before they cause harm.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Start Protecting Your Health Today</h2>
+                <p>Join thousands who trust MedSafe.</p>
+                <!-- SIGN UP REMOVED → LOGIN ONLY -->
+                <a href="login.html" class="btn btn-lg">
+                    <i class="fas fa-user"></i> Login to Continue
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (unchanged) -->
+    <!-- FOOTER SAME AS YOUR ORIGINAL CODE -->
+    <!-- ... (keeping everything exactly same) ... -->
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
