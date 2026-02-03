@@ -30,8 +30,9 @@ if (googleBtn) {
     googleBtn.addEventListener("click", async () => {
         try {
             await signInWithPopup(auth, provider);
-            window.location.href = "/medication"; // Updated route
+            window.location.href = "/medication.html";   // FIXED FOR VERCEL
         } catch (error) {
+            console.error(error);
             alert("Google Login Failed. Try Again.");
         }
     });
@@ -39,10 +40,15 @@ if (googleBtn) {
 
 /* ------------ LOGOUT BUTTON ------------ */
 const logoutBtn = document.getElementById("logoutBtn");
+
 if (logoutBtn) {
     logoutBtn.addEventListener("click", async () => {
-        await signOut(auth);
-        window.location.href = "/"; // Updated route
+        try {
+            await signOut(auth);
+            window.location.href = "/index.html";   // FIXED FOR VERCEL
+        } catch (error) {
+            console.error(error);
+        }
     });
 }
 
@@ -54,6 +60,7 @@ function renderList() {
     if (!medList) return;
 
     medList.innerHTML = "";
+
     meds.forEach((m, i) => {
         const div = document.createElement("div");
         div.className = "med-item-added";
@@ -76,16 +83,24 @@ window.removeMed = function (i) {
 };
 
 const addBtn = document.getElementById("addMedBtn");
+
 if (addBtn) {
     addBtn.addEventListener("click", () => {
         const name = document.getElementById("medName").value.trim();
         const dosage = document.getElementById("medDosage").value.trim();
         const freq = document.getElementById("medFreq").value;
 
-        if (!name) return alert("Enter medication name!");
+        if (!name) {
+            alert("Enter medication name!");
+            return;
+        }
 
         meds.push({ name, dosage, freq });
         renderList();
+
+        document.getElementById("medName").value = "";
+        document.getElementById("medDosage").value = "";
+        document.getElementById("medFreq").value = "";
     });
 }
 
@@ -96,6 +111,7 @@ const resultsList = document.getElementById("resultsList");
 
 if (checkBtn) {
     checkBtn.addEventListener("click", async () => {
+
         resultsList.innerHTML = "";
         resultsBox.classList.remove("hidden");
 
@@ -115,8 +131,13 @@ if (checkBtn) {
             try {
                 const response = await fetch(API_URL, {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ drug1: d1, drug2: d2 })
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        drug1: d1,
+                        drug2: d2
+                    })
                 });
 
                 const data = await response.json();
@@ -124,10 +145,11 @@ if (checkBtn) {
                 if (data.success) {
                     showResult(data.data);
                 } else {
-                    showError(data.error);
+                    showError(data.error || "Unknown API error.");
                 }
 
             } catch (error) {
+                console.error(error);
                 showError("API request failed.");
             }
         }
@@ -149,11 +171,15 @@ function showResult(d) {
     resultsList.appendChild(card);
 }
 
-function showError(msg) {
+function showError(message) {
     const card = document.createElement("div");
     card.className = "interaction-card";
     card.style.border = "2px solid red";
-    card.innerHTML = `<p><strong>Error:</strong> ${msg}</p>`;
+
+    card.innerHTML = `
+        <p><strong>Error:</strong> ${message}</p>
+    `;
+
     resultsList.appendChild(card);
 }
 
