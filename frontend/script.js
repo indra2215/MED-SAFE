@@ -20,6 +20,9 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
+/* ------------ BACKEND API (HF SPACE) ------------ */
+const API_URL = "https://indrasr-medsafe.hf.space/predict";
+
 /* ------------ LOGIN PAGE ------------ */
 const googleBtn = document.getElementById("googleLoginBtn");
 
@@ -27,7 +30,7 @@ if (googleBtn) {
     googleBtn.addEventListener("click", async () => {
         try {
             await signInWithPopup(auth, provider);
-            window.location.href = "medication.html";  // FIXED PAGE NAME
+            window.location.href = "/medication"; // Updated route
         } catch (error) {
             alert("Google Login Failed. Try Again.");
         }
@@ -37,9 +40,9 @@ if (googleBtn) {
 /* ------------ LOGOUT BUTTON ------------ */
 const logoutBtn = document.getElementById("logoutBtn");
 if (logoutBtn) {
-    logoutBtn.addEventListener("click", () => {
-        signOut(auth);
-        window.location.href = "index.html";
+    logoutBtn.addEventListener("click", async () => {
+        await signOut(auth);
+        window.location.href = "/"; // Updated route
     });
 }
 
@@ -87,8 +90,6 @@ if (addBtn) {
 }
 
 /* ------------ API CALL ------------ */
-const API_URL = "http://127.0.0.1:8000/predict";
-
 const checkBtn = document.getElementById("checkInteractionsBtn");
 const resultsBox = document.getElementById("resultsSection");
 const resultsList = document.getElementById("resultsList");
@@ -98,6 +99,11 @@ if (checkBtn) {
         resultsList.innerHTML = "";
         resultsBox.classList.remove("hidden");
 
+        if (meds.length < 2) {
+            alert("Add at least two medications.");
+            return;
+        }
+
         let pairs = [];
         for (let i = 0; i < meds.length; i++) {
             for (let j = i + 1; j < meds.length; j++) {
@@ -106,14 +112,24 @@ if (checkBtn) {
         }
 
         for (let [d1, d2] of pairs) {
-            const response = await fetch(API_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ drug1: d1, drug2: d2 })
-            });
+            try {
+                const response = await fetch(API_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ drug1: d1, drug2: d2 })
+                });
 
-            const data = await response.json();
-            showResult(data.data);
+                const data = await response.json();
+
+                if (data.success) {
+                    showResult(data.data);
+                } else {
+                    showError(data.error);
+                }
+
+            } catch (error) {
+                showError("API request failed.");
+            }
         }
     });
 }
@@ -130,6 +146,14 @@ function showResult(d) {
         <p><strong>FLAN Explanation:</strong> ${d.flan_explanation}</p>
     `;
 
+    resultsList.appendChild(card);
+}
+
+function showError(msg) {
+    const card = document.createElement("div");
+    card.className = "interaction-card";
+    card.style.border = "2px solid red";
+    card.innerHTML = `<p><strong>Error:</strong> ${msg}</p>`;
     resultsList.appendChild(card);
 }
 
